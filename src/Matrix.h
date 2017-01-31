@@ -15,9 +15,12 @@ public:
     const int cols() const;
 
     const std::string dump() const;
+    void transpose();
 
     std::vector<int>& operator[](std::size_t idx) { return m_data[idx]; }
     const std::vector<int>& operator[](std::size_t idx) const { return m_data[idx]; }
+
+
 private:
     int m_rows;
     int m_cols;

@@ -37,4 +37,20 @@ const std::string Matrix::dump() const
     return ss.str();
 }
 
+ void Matrix::transpose()
+{
+    const int cols = m_data.size();
+    const int rows = m_data[0].size();
+
+    std::vector<std::vector<int>> transp(rows, std::vector<int>(cols));
+
+    for(uint c = 0; c < m_data.size(); c++) {
+        for(uint r = 0; r < m_data[0].size(); r++) {
+            transp[r][c] = m_data[c][r];
+        }
+    }
+
+    m_data = transp;
+}
+
 } // namespace neox
