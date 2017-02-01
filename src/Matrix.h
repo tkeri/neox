@@ -16,6 +16,9 @@ public:
 
     const std::string dump() const;
     void transpose();
+    const int symmetry() const;
+    const int square() const;
+    const int determinant() const;
 
     std::vector<int>& operator[](std::size_t idx) { return m_data[idx]; }
     const std::vector<int>& operator[](std::size_t idx) const { return m_data[idx]; }
