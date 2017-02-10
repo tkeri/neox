@@ -51,37 +51,39 @@ void Matrix::transpose()
 
     m_data = transp;
 }
-//TODO: square test
-const int Matrix::symmetry() const
+
+const bool Matrix::symmetry() const
 {
-    for(uint c = m_data.size() - 1; m_data.size() >= 0; c--) {
-        for(uint r = 0; r < m_data[0].size(); r++) {
-            if (m_data[r][c] != m_data[c][r]) {
-                return 0;
-            }
-            else {
-                return 1;
-            }
+    if (!this->square())
+        return false;
+
+    for(uint r = 0; r < m_data[0].size(); r++) {
+        for(uint c = 0; c < m_data.size(); c++) {
+            if (m_data[r][c] != m_data[c][r])
+                return false;
         }
     }
-//TODO: ?
-    return 0;
+
+    return true;
 }
 
-const int Matrix::square() const
+const bool Matrix::square() const
 {
-    if (m_data.size() == m_data[0].size())
-        return 1;
-    else
-        return 0;
+    return m_data.size() == m_data[0].size();
 }
 
-//TODO: determinant
-const int Matrix::determinant() const
+const bool Matrix::diag() const
 {
+    if (!this->square())
+        return false;
 
-    return 0;
+    for(uint r = 0; r < m_data[0].size(); r++) {
+        for(uint c = 0; c < m_data.size(); c++) {
+            if (c != r && m_data[r][c] != 0)
+                return false;
+        }
+    }
+    return true;
 }
-
 
 } // namespace neox
