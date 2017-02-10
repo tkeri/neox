@@ -29,8 +29,8 @@ private:
 
 std::ostream& operator<<(std::ostream&, const Matrix&);
 
-inline bool operator==(const Matrix& lhs, const Matrix& rhs);
-inline bool operator!=(const Matrix& lhs, const Matrix& rhs);
+bool operator==(const Matrix& lhs, const Matrix& rhs);
+bool operator!=(const Matrix& lhs, const Matrix& rhs);
 
 } // namespace neox
 
