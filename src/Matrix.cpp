@@ -81,4 +81,28 @@ const bool Matrix::diag() const
     return true;
 }
 
+std::ostream& operator<<(std::ostream& os, const Matrix& obj)
+{
+    os << obj.dump();
+    return os;
+}
+
+bool operator==(const Matrix& lhs, const Matrix& rhs)
+{
+    if (lhs.rows() != rhs.rows() || lhs.cols() != rhs.cols())
+        return false;
+
+    for (std::size_t r = 0; r < lhs.rows(); ++r) {
+        if (lhs[r] != rhs[r])
+            return false;
+    }
+
+    return true;
+}
+
+bool operator!=(const Matrix& lhs, const Matrix& rhs)
+{
+    return !(lhs == rhs);
+}
+
 } // namespace neox

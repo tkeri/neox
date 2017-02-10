@@ -23,18 +23,15 @@ public:
     std::vector<int>& operator[](std::size_t idx) { return m_data[idx]; }
     const std::vector<int>& operator[](std::size_t idx) const { return m_data[idx]; }
 
-
 private:
     std::vector<std::vector<int>> m_data;
-
 };
 
-} // namespace neox
+std::ostream& operator<<(std::ostream&, const Matrix&);
 
-inline std::ostream& operator<<(std::ostream& os, const neox::Matrix& obj)
-{
-    os << obj.dump();
-    return os;
-}
+inline bool operator==(const Matrix& lhs, const Matrix& rhs);
+inline bool operator!=(const Matrix& lhs, const Matrix& rhs);
+
+} // namespace neox
 
 #endif // Matrix_h
