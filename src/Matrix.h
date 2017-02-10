@@ -11,8 +11,8 @@ class Matrix {
 public:
     Matrix(const int rows = 1, const int cols = 1);
 
-    const int rows() const;
-    const int cols() const;
+    const std::size_t rows() const;
+    const std::size_t cols() const;
 
     const std::string dump() const;
     void transpose();
@@ -25,8 +25,6 @@ public:
 
 
 private:
-    int m_rows;
-    int m_cols;
     std::vector<std::vector<int>> m_data;
 
 };

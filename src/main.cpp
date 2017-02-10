@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 //    a[1][2] = 5;
 //    a[2][0] = 1;
 //    a[2][1] = 5;
-    a[2][2] = 0;
+    a[2][2] = a[0][0];
 
     std::cout << a << std::endl;
 

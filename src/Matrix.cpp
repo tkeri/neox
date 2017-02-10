@@ -7,29 +7,27 @@
 namespace neox {
 
 Matrix::Matrix(const int rows, const int cols)
-    : m_rows(rows)
-    , m_cols(cols)
-    , m_data(cols, std::vector<int>(rows))
+    : m_data(rows, std::vector<int>(cols))
 {
 }
 
-const int Matrix::rows() const
+const std::size_t Matrix::rows() const
 {
-    return m_rows;
+    return m_data.size();
 }
 
-const int Matrix::cols() const
+const std::size_t Matrix::cols() const
 {
-    return m_cols;
+    return m_data[0].size();
 }
 
 const std::string Matrix::dump() const
 {
     std::stringstream ss;
 
-    for(uint c = 0; c < m_data.size(); c++) {
-        for(uint r = 0; r < m_data[0].size(); r++) {
-            ss << " " << m_data[c][r];
+    for(std::size_t r = 0; r < rows(); r++) {
+        for(std::size_t c = 0; c < cols(); c++) {
+            ss << " " << m_data[r][c];
         }
         ss << std::endl;
     }
@@ -38,14 +36,11 @@ const std::string Matrix::dump() const
 
 void Matrix::transpose()
 {
-    const int cols = m_data.size();
-    const int rows = m_data[0].size();
+    std::vector<std::vector<int>> transp(cols(), std::vector<int>(rows()));
 
-    std::vector<std::vector<int>> transp(rows, std::vector<int>(cols));
-
-    for(uint c = 0; c < m_data.size(); c++) {
-        for(uint r = 0; r < m_data[0].size(); r++) {
-            transp[r][c] = m_data[c][r];
+    for(std::size_t r = 0; r < rows(); r++) {
+        for(std::size_t c = 0; c < cols(); c++) {
+            transp[c][r] = m_data[r][c];
         }
     }
 
@@ -57,8 +52,8 @@ const bool Matrix::symmetry() const
     if (!this->square())
         return false;
 
-    for(uint r = 0; r < m_data[0].size(); r++) {
-        for(uint c = 0; c < m_data.size(); c++) {
+    for(std::size_t r = 0; r < rows(); r++) {
+        for(std::size_t c = 0; c < cols(); c++) {
             if (m_data[r][c] != m_data[c][r])
                 return false;
         }
@@ -69,7 +64,7 @@ const bool Matrix::symmetry() const
 
 const bool Matrix::square() const
 {
-    return m_data.size() == m_data[0].size();
+    return rows() == cols();
 }
 
 const bool Matrix::diag() const
@@ -77,9 +72,9 @@ const bool Matrix::diag() const
     if (!this->square())
         return false;
 
-    for(uint r = 0; r < m_data[0].size(); r++) {
-        for(uint c = 0; c < m_data.size(); c++) {
-            if (c != r && m_data[r][c] != 0)
+    for(std::size_t r = 0; r < rows(); r++) {
+        for(std::size_t c = 0; c < cols(); c++) {
+            if (r != c && m_data[r][c] != 0)
                 return false;
         }
     }
