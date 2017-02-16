@@ -15,11 +15,16 @@ std::ostream& operator<<(std::ostream& os, const Pair& obj)
 
 Pair testEqual();
 Pair testNotEqual();
+Pair testSquare();
+Pair testDiag();
+
 
 void runTest()
 {
     std::cout << "Test Equal: " << testEqual() << std::endl;
     std::cout << "Test Not-Equal: " << testNotEqual() << std::endl;
+    std::cout << "Test Sqare: " << testSquare() << std::endl;
+    std::cout << "Test Diag: " << testDiag() << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -41,6 +46,7 @@ int main(int argc, char* argv[])
     std::cout << a << std::endl;
 
     a.transpose();
+    a.square();
 
     std::cout << a << std::endl;
 
@@ -139,6 +145,58 @@ Pair testNotEqual()
         stat.pass++;
     else
         stat.fail++;
+
+    return stat;
+}
+
+Pair testSquare()
+{
+    Pair stat;
+
+    neox::Matrix S(3, 3);
+
+    if (S.square())
+        stat.pass++;
+    else
+        stat.fail++;
+
+    neox::Matrix nonS(3, 2);
+
+    if (nonS.square())
+        stat.fail++;
+    else
+        stat.pass++;
+
+    return stat;
+}
+
+Pair testDiag()
+{
+    Pair stat;
+
+    neox::Matrix Diag(2, 2);
+
+    Diag[0][0] = 1;
+    Diag[0][1] = 0;
+    Diag[1][0] = 0;
+    Diag[1][1] = 2;
+
+    if (Diag.diag())
+        stat.pass++;
+    else
+        stat.fail++;
+
+    neox::Matrix nonDiag(2, 2);
+
+    nonDiag[0][0] = 1;
+    nonDiag[0][1] = 1;
+    nonDiag[1][0] = 1;
+    nonDiag[1][1] = 1;
+
+    if (nonDiag.diag())
+        stat.fail++;
+    else
+        stat.pass++;
 
     return stat;
 }
